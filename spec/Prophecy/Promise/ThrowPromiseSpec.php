@@ -93,7 +93,7 @@ class ThrowPromiseSpec extends ObjectBehavior
 
         $this->beConstructedWith('\Fixtures\Prophecy\ThrowableInterface');
 
-        $this->shouldNotThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
+        $this->shouldThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
     }
 
     function it_throws_a_throwable_by_class_name()
@@ -104,7 +104,7 @@ class ThrowPromiseSpec extends ObjectBehavior
 
         $this->beConstructedWith('\Throwable');
 
-        $this->shouldNotThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
+        $this->shouldThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
     }
 }
 
