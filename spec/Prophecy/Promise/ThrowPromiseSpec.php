@@ -85,7 +85,7 @@ class ThrowPromiseSpec extends ObjectBehavior
         $this->shouldNotThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
     }
 
-    function it_throws_an_extension_of_throwable_by_class_name()
+    function it_throws_an_extension_of_throwable_by_class_name(ObjectProphecy $object, MethodProphecy $method)
     {
         if (!interface_exists('\Throwable')) {
             throw new SkippingException('The interface Throwable, introduced in PHP 7, does not exist');
@@ -94,9 +94,11 @@ class ThrowPromiseSpec extends ObjectBehavior
         $this->beConstructedWith('\Fixtures\Prophecy\ThrowableInterface');
 
         $this->shouldNotThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
+
+        $this->shouldNotThrow('\Error')->duringExecute(array(), $object, $method);
     }
 
-    function it_throws_a_throwable_by_class_name()
+    function it_throws_a_throwable_by_class_name(ObjectProphecy $object, MethodProphecy $method)
     {
         if (!interface_exists('\Throwable')) {
             throw new SkippingException('The interface Throwable, introduced in PHP 7, does not exist');
@@ -105,6 +107,8 @@ class ThrowPromiseSpec extends ObjectBehavior
         $this->beConstructedWith('\Throwable');
 
         $this->shouldNotThrow('Prophecy\Exception\InvalidArgumentException')->duringInstantiation();
+
+        $this->shouldNotThrow('\Error')->duringExecute(array(), $object, $method);
     }
 }
 
